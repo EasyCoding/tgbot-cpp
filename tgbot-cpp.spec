@@ -1,11 +1,11 @@
 Name: tgbot-cpp
-Version: 1.2
-Release: 2%{?dist}
+Version: 1.2.1
+Release: 1%{?dist}
 
 Summary: C++ library for Telegram bot API
 License: MIT
 URL: https://github.com/reo7sp/%{name}
-Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: openssl-devel
 BuildRequires: ninja-build
@@ -29,8 +29,6 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 %prep
 %autosetup
 mkdir -p %{_target_platform}
-sed -e 's@DESTINATION lib@DESTINATION %{_lib}@g' -i CMakeLists.txt
-echo "set_property(TARGET \${PROJECT_NAME} PROPERTY SOVERSION 1)" >> CMakeLists.txt
 
 %build
 pushd %{_target_platform}
@@ -59,6 +57,9 @@ popd
 %{_libdir}/libTgBot.so
 
 %changelog
+* Sun Mar 15 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 1.2.1-1
+- Updated to version 1.2.1.
+
 * Fri Jan 31 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
